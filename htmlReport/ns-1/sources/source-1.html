@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MainKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: MainKt (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MainKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;fun main() {
+&nbsp;
+&nbsp;    //val cokeSoda = Soda(&quot;Coke&quot;, 1.00, 12)
+&nbsp;
+&nbsp;    //Map key-pairs to soda
+&nbsp;    //check quantity before giving out soda
+&nbsp;    //give change
+&nbsp;
+<b class="nc">&nbsp;    val vendingMachine = VendingMachine()</b>
+&nbsp;
+<b class="nc">&nbsp;    val coke = Product(&quot;Coke&quot;, 1.00, 12.0)</b>
+<b class="nc">&nbsp;    val pepsi= Product(&quot;Pepsi&quot;, 1.50, 12.0)</b>
+<b class="nc">&nbsp;    val pokemonCardPack = Product(&quot;Pokemon Card Pack&quot;, 3.99, 10.0)</b>
+<b class="nc">&nbsp;    vendingMachine.mapButtonToProduct(&quot;a1&quot;, coke)</b>
+<b class="nc">&nbsp;    vendingMachine.restockProduct(&quot;Coke&quot;, 12.0)</b>
+<b class="nc">&nbsp;    vendingMachine.mapButtonToProduct(&quot;a2&quot;, pepsi)</b>
+<b class="nc">&nbsp;    vendingMachine.mapButtonToProduct(&quot;a3&quot;, pokemonCardPack)</b>
+&nbsp;/*    sodaInventory.addSoda(cokeSoda)
+&nbsp;    sodaInventory.addSoda(pepsiSoda)*/
+&nbsp;    //vendingMachine.insertMoney(0.0)
+&nbsp;    //vendingMachine.insertMoney(-36789.0)
+<b class="nc">&nbsp;    vendingMachine.insertMoney(1.0)</b>
+<b class="nc">&nbsp;    vendingMachine.pressButton(&quot;a1&quot;)</b>
+<b class="nc">&nbsp;    vendingMachine.insertMoney(1.0)</b>
+<b class="nc">&nbsp;    vendingMachine.insertMoney(1.0)</b>
+<b class="nc">&nbsp;    vendingMachine.pressButton(&quot;a2&quot;)</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-03-07 15:57</div>
+</div>
+</body>
+</html>

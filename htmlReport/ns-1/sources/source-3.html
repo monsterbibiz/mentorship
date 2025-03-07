@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > VendingMachine</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: VendingMachine (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VendingMachine</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    13.6%
+  </span>
+  <span class="absValue">
+    (3/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (8/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode"><b class="fc">&nbsp;class VendingMachine {</b>
+&nbsp;
+&nbsp;    //helper function - below instance variable. mu
+&nbsp;    //check quantity
+&nbsp;
+<b class="fc">&nbsp;    private var cashInMachine: Double = 100.0</b>
+&nbsp;    private var cashInserted: Double = 0.0
+&nbsp;
+<b class="fc">&nbsp;    private val buttonToPriceMap = mutableMapOf&lt;String, Product&gt;( //make mutableMap</b>
+&nbsp;        /*        &quot;Coke&quot; to 1.0,
+&nbsp;                &quot;Pepsi&quot; to 1.50,
+&nbsp;                &quot;Sprite&quot; to 1.0
+&nbsp;                //KEY      VALUE*/
+&nbsp;    )
+&nbsp;
+&nbsp;    // Should this be rolled into restock function?
+&nbsp;    fun mapButtonToProduct(buttonName: String, product: Product) {
+<b class="nc">&nbsp;        this.buttonToPriceMap[buttonName] = product</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    fun insertMoney(cash: Double) {
+<b class="fc">&nbsp;        if (cash &lt;= 0.0) {</b>
+<b class="fc">&nbsp;            throw IllegalArgumentException(&quot;cash must be &gt; 0&quot;)</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.cashInserted += cash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    fun pressButton(buttonName: String) {
+&nbsp;        // TODO: Check quantity of product in stock
+&nbsp;        // If quantity is &gt; 0, subtract 1 from stack
+&nbsp;        // If quantity is &lt; 0, throw error
+<b class="pc">&nbsp;        if (buttonToPriceMap[buttonName] !is Product) {</b>
+<b class="fc">&nbsp;            throw IllegalArgumentException(&quot;Product is not valid&quot;)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        val product = buttonToPriceMap[buttonName]!!</b>
+<b class="nc">&nbsp;        val price: Double = product.price</b>
+<b class="nc">&nbsp;        val quantity = product.quantity</b>
+&nbsp;
+<b class="nc">&nbsp;        if (quantity == 0.0) {</b>
+<b class="nc">&nbsp;            println(&quot;Sorry. We are out of ${product.name}&quot;)</b>
+<b class="nc">&nbsp;            throw IllegalStateException(&quot;Product ${product.name} is out of stock&quot;)</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (cashInserted &lt; price) {</b>
+<b class="nc">&nbsp;            throw IllegalArgumentException(&quot;Not enough cash. Need ${price - cashInserted}.&quot;)</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cashInMachine += cashInserted;</b>
+<b class="nc">&nbsp;        product.quantity--</b>
+<b class="nc">&nbsp;        println(product.quantity)</b>
+&nbsp;
+<b class="nc">&nbsp;        val change = cashInserted - price;</b>
+<b class="nc">&nbsp;        if (change &gt; 0.0) {</b>
+<b class="nc">&nbsp;            println(&quot;Thank You! Your change is $${change}.&quot;)</b>
+<b class="nc">&nbsp;            cashInMachine -= change;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            println(&quot;Thank You! &quot;)</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        cashInserted = 0.0</b>
+&nbsp;
+<b class="nc">&nbsp;        println(&quot;Here&#39;s your ${product.name} &quot;)</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    // TODO: Create restock function
+&nbsp;    // Check if product is in machine
+&nbsp;    // Do we need to know button to product? Do we iterate over the map to find it?
+&nbsp;    // If product is not in machine, does restock map it to the next available button?
+&nbsp;
+&nbsp;    fun restockProduct(
+&nbsp;        name : String,
+&nbsp;        quantityToIncrease : Double) {
+&nbsp;
+<b class="nc">&nbsp;        if (!buttonToPriceMap.values.any { it.name == name }) {</b>
+<b class="nc">&nbsp;            throw IllegalStateException(&quot;Item does not exist. restockProduct function&quot;)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        val product = buttonToPriceMap.values.find { it.name == name }</b>
+<b class="nc">&nbsp;        product?.quantity += quantityToIncrease</b>
+<b class="nc">&nbsp;        println(&quot;Restocked $quantityToIncrease of ${product?.name}. New quantity: ${product?.quantity}&quot;)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;/*
+&nbsp;class SodaMapping() {
+&nbsp;
+&nbsp;    //Initialize empty list of Sodas
+&nbsp;    private var sodaList : MutableMap&lt;String, Double&gt; = mutableMapOf()
+&nbsp;
+&nbsp;    fun addSoda(
+&nbsp;        soda : Soda) {
+&nbsp;        //MAP String -&gt; Double
+&nbsp;                          //KEY    VALUE
+&nbsp;        sodaList[soda.name] = soda.price
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;*/
+&nbsp;
+&nbsp;//displayProducts
+&nbsp;//refund-
+&nbsp;//digit pad
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-03-07 15:57</div>
+</div>
+</body>
+</html>
